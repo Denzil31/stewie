@@ -2,7 +2,7 @@
 Stewie URL Shortener written in Python which uses FastAPI and DynamoDB
 
 ## Installation
-1. Clone the repository. `git clone git@github.com:uniacco-tech/stewie.git`
+1. Clone the repository. `git clone https://github.com/Denzil31/stewie.git`
 2. Go to the project directory. `cd stewie`
 3. Create a virtual environment. `python3 -m venv venv`
 4. Activate the virtual environment. `source venv/bin/activate`
