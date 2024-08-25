@@ -91,3 +91,17 @@ class DynamoDB(DatabaseInterface):
             msg = f'{e.response["Error"]["Code"]} - {e.response["Error"]["Message"]}'
             logger.error(msg)
             raise DatabaseError()
+
+    def delete_expired_urls(self):
+        try:
+            table = self.dynamodb.Table(self.config.table)
+            response = table.scan()
+            for item in response['Items']:
+                expires_at = item.get('expires_at')
+                if expires_at and expires_at < int(datetime.now().timestamp()):
+                    table.delete_item(Key={'short_code': item['short_code']})
+        except ClientError as e:
+            # Doc ref. https://boto3.amazonaws.com/v1/documentation/api/latest/guide/error-handling.html
+            msg = f'{e.response["Error"]["Code"]} - {e.response["Error"]["Message"]}'
+            logger.error(msg)
+            raise DatabaseError()

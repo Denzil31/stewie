@@ -15,3 +15,7 @@ class DatabaseInterface(ABC):
     @abstractmethod
     def get_url_mapping(self, short_code):
         pass
+
+    @abstractmethod
+    def delete_expired_urls(self):
+        pass

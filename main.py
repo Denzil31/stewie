@@ -7,6 +7,7 @@ from fastapi import FastAPI, Depends, HTTPException, status, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.security import APIKeyHeader
 from fastapi.responses import RedirectResponse, JSONResponse
+from fastapi_utilities.repeat.repeat_at import repeat_at
 from pydantic import BaseModel
 from dotenv import load_dotenv
 
@@ -138,3 +139,15 @@ async def redirect_to_long_url(short_code: str, request: Request):
     ) as e:
         content = {'message': e.message}
         return JSONResponse(status_code=e.code, content=content)
+
+
+# Cron job to delete expired URLs
+@app.on_event('startup')
+@repeat_at(cron='5 0 * * *')
+def delete_expired_urls():
+    try:
+        shortener = URLShortener(db)
+        shortener.delete_expired_urls()
+        logger.info('Expired URLs deleted successfully')
+    except DatabaseError as e:
+        logger.error(e.message)
