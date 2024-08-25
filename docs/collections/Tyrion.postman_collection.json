@@ -1,0 +1,109 @@
+{
+	"info": {
+		"_postman_id": "435f5f95-b693-42c4-8202-c6e02d2abaea",
+		"name": "URL Shortener",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "29646504"
+	},
+	"item": [
+		{
+			"name": "Shorten",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"long_url\": \"https://www.facebook.com\",\n    \"expires_at\": 10,\n    \"short_code\": \"fb2\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/shorten",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"shorten"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "List Copy",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/fb2",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"fb2"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "apikey",
+		"apikey": [
+			{
+				"key": "value",
+				"value": "{{token}}",
+				"type": "string"
+			},
+			{
+				"key": "key",
+				"value": "X-API-Key",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://127.0.0.1:8004",
+			"type": "string"
+		},
+		{
+			"key": "token",
+			"value": "9yCI2dPvT_gtfRdnIygpFktGv0OfMDS9NA2d3I9MfYo",
+			"type": "string"
+		},
+		{
+			"key": "base_url",
+			"value": "",
+			"type": "string",
+			"disabled": true
+		}
+	]
+}

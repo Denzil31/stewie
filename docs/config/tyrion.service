@@ -1,0 +1,16 @@
+# This file is used to configure the systemd service for the Tyrion URL Shortener
+# Used to run the FastAPI application using Gunicorn and uvicorn workers
+# Path: /etc/systemd/system/tyrion.service
+[Unit]
+Description=Gunicorn instance to serve Tyrion URL Shortener using FastAPI
+After=network.target
+
+[Service]
+User=ec2-user
+Group=ec2-user
+WorkingDirectory=/home/ec2-user/tyrion
+ExecStart=/home/ec2-user/tyrion/venv/bin/gunicorn main:app --workers 4 --worker-class uvicorn.workers.UvicornWorker --bind 127.0.0.1:8080
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
