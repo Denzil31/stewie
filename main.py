@@ -10,9 +10,9 @@ from fastapi.responses import RedirectResponse, JSONResponse
 from pydantic import BaseModel
 from dotenv import load_dotenv
 
-from src.tyrion.implementations.databases import DynamoDB, DynamoDBConfig
-from src.tyrion import URLShortener, LogConfig
-from src.tyrion.exceptions import (
+from src.stewie.implementations.databases import DynamoDB, DynamoDBConfig
+from src.stewie import URLShortener, LogConfig
+from src.stewie.exceptions import (
     ShortCodeNotFoundError,
     ShortCodeAlreadyExistsError,
     LinkExpiredError,
@@ -40,18 +40,7 @@ app = FastAPI(
     redoc_url=None,
     openapi_url=None,
 )
-origins = (
-    [
-        'https://uniacco.com',
-        'https://crm.uniacco.com',
-        'https://unicreds.com',
-        'https://crm.unicreds.com',
-        'https://unischolars.com',
-        'https://crm.unischolars.com',
-    ]
-    if os.getenv('ENV') == 'prod'
-    else ['*']
-)
+origins = ['*']
 
 app.add_middleware(
     CORSMiddleware,
@@ -71,7 +60,7 @@ db = DynamoDB(config)
 class ShortenRequest(BaseModel):
     long_url: str
     short_code: str = None
-    expires_at: int = None  # Expiration timestamp in minutes
+    expires_in: int = None  # Expiration timestamp in minutes
 
 
 class ShortURL(BaseModel):
@@ -101,12 +90,12 @@ async def shorten_url(
     try:
         shortener = URLShortener(db)
 
-        expires_at = request.expires_at
-        if not expires_at:
-            expires_at = 30
+        expires_in = request.expires_in
+        if not expires_in:
+            expires_in = 30
 
         short_code = shortener.shorten_url(
-            request.long_url, short_code=request.short_code, expires_at=expires_at
+            request.long_url, short_code=request.short_code, expires_in=expires_in
         )
         content = {'short_code': short_code}
         return JSONResponse(status_code=status.HTTP_201_CREATED, content=content)

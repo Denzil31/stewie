@@ -34,8 +34,8 @@ class URLShortener:
         except ValueError:
             raise InvalidLongUrlError
 
-    def shorten_url(self, long_url, short_code=None, expires_at=30):
-        if expires_at > 525960:  # A year in minutes
+    def shorten_url(self, long_url, short_code=None, expires_in=30):
+        if expires_in > 525960:  # A year in minutes
             raise ExpiryTooHighError()
 
         self.validate_url(long_url)
@@ -48,7 +48,7 @@ class URLShortener:
         else:
             short_code = self.get_short_code(long_url)
 
-        expires_at = int((datetime.now() + timedelta(minutes=expires_at)).timestamp())
+        expires_at = int((datetime.now() + timedelta(minutes=expires_in)).timestamp())
 
         # Add the URL mapping to the database
         self.database.add_url_mapping(short_code, long_url, expires_at)

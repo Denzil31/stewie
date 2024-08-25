@@ -8,7 +8,7 @@ load_dotenv()
 
 
 class LogConfig(BaseModel):
-    LOGGER_NAME: str = 'tyrion'
+    LOGGER_NAME: str = 'stewie'
     LOG_FORMAT: str = '%(levelprefix)s | %(asctime)s | %(message)s'
     LOG_LEVEL: str = 'DEBUG'
     LOG_FILE_PATH: str = os.getenv('LOG_PATH')

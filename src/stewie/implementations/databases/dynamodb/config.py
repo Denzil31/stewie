@@ -1,7 +1,7 @@
 import os
 
-from src.tyrion.interfaces.database import DatabaseConfigInterface
-from src.tyrion.exceptions import ConfigError
+from src.stewie.interfaces.database import DatabaseConfigInterface
+from src.stewie.exceptions import ConfigError
 
 
 class DynamoDBConfig(DatabaseConfigInterface):

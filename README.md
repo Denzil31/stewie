@@ -1,9 +1,9 @@
-# tyrion
-Tyrion URL Shortener written in Python which uses FastAPI and DynamoDB
+# Stewie
+Stewie URL Shortener written in Python which uses FastAPI and DynamoDB
 
 ## Installation
-1. Clone the repository. `git clone git@github.com:uniacco-tech/tyrion.git`
-2. Go to the project directory. `cd tyrion`
+1. Clone the repository. `git clone git@github.com:uniacco-tech/stewie.git`
+2. Go to the project directory. `cd stewie`
 3. Create a virtual environment. `python3 -m venv venv`
 4. Activate the virtual environment. `source venv/bin/activate`
 5. Install the dependencies. `pip install -r requirements.txt --no-cache-dir --upgrade`
@@ -13,7 +13,7 @@ Tyrion URL Shortener written in Python which uses FastAPI and DynamoDB
 ```bash
 java -Djava.library.path=./DynamoDBLocal_lib -jar DynamoDBLocal.jar -sharedDb -port 8005
 ```
-9. Create a table named `tyrion` with `short_url` as hash key.
+9. Create a table named `stewie` with `short_url` as hash key.
 ```python
 import os
 
@@ -52,22 +52,22 @@ print(f'Created table {db_table}')
 ---
 
 ## API Documentation
-[Postman Docs](/docs/collections/Tyrion.postman_collection.json)
+[Postman Docs](/docs/collections/Stewie.postman_collection.json)
 
 ---
 
 ## Configurations
-[App Server: Gunicorn Service File](/docs/config/tyrion.service)
+[App Server: Gunicorn Service File](/docs/config/stewie.service)
 
-[Web Server: Nginx Config](/docs/config/tyrion.conf)
+[Web Server: Nginx Config](/docs/config/stewie.conf)
 
 ---
 
 ## Deployment
-1. Go to [AWS Console](https://ap-south-1.console.aws.amazon.com/ec2/home?region=ap-south-1#Instances:tag:Name=url-shortner;v=3;$case=tags:true%5C,client:false;$regex=tags:false%5C,client:false) and connect to `url-shortner` instance.
-2. Go to project directory. `cd ~/tyrion`
+1. Go to [AWS Console](https://ap-south-1.console.aws.amazon.com/ec2/home) and connect to `url-shortner` instance.
+2. Go to project directory. `cd ~/stewie`
 3. Pull the latest changes. `git pull origin master`
 4. Activate the virtual environment. `source venv/bin/activate`
 5. Install the dependencies. `pip install -r requirements.txt --no-cache-dir --upgrade`
-6. Restart the server. `sudo systemctl restart tyrion`
-7. Verify logs. `tail -f /var/log/tyrion/app.log`
+6. Restart the server. `sudo systemctl restart stewie`
+7. Verify logs. `tail -f /var/log/stewie/app.log`

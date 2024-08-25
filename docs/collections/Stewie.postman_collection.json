@@ -13,7 +13,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"long_url\": \"https://www.facebook.com\",\n    \"expires_at\": 10,\n    \"short_code\": \"fb2\"\n}",
+					"raw": "{\n    \"long_url\": \"https://www.facebook.com\",\n    \"expires_in\": 10,\n    \"short_code\": \"fb2\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"

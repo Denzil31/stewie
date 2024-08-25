@@ -6,12 +6,12 @@ import boto3
 from dotenv import load_dotenv
 from botocore.exceptions import ClientError
 
-from src.tyrion.exceptions import (
+from src.stewie.exceptions import (
     DatabaseError,
     LinkExpiredError,
     ShortCodeNotFoundError,
 )
-from src.tyrion.interfaces.database import DatabaseInterface
+from src.stewie.interfaces.database import DatabaseInterface
 
 load_dotenv()
 logger = logging.getLogger(__name__)
